@@ -1,0 +1,93 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Форматирование
+        shell: pwsh
+        run: |
+          $bad = gofmt -l cmd internal tools
+          if ($bad) { Write-Error "Не отформатировано gofmt:`n$bad"; exit 1 }
+
+      - name: go vet и тесты
+        shell: pwsh
+        run: ./build.ps1 test
+
+  # Замечания линтера видны отдельной задачей и выпуск не останавливают:
+  # новая версия линтера не должна сама по себе срывать релиз.
+  lint:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v8
+        with:
+          version: latest
+
+  build:
+    needs: test
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Версия
+        id: version
+        shell: pwsh
+        run: |
+          $v = if ($env:GITHUB_REF -like 'refs/tags/v*') { $env:GITHUB_REF_NAME.TrimStart('v') } else { '0.0.0' }
+          "version=$v" >> $env:GITHUB_OUTPUT
+
+      # Сборка под amd64 и arm64, zip-архивы и установщик (если на образе
+      # есть NSIS). Подпись создаётся, если задан секрет с закрытым ключом.
+      # Открытый ключ берётся из build/update.pub; переменная
+      # DOFIRST_UPDATE_KEY нужна, только чтобы его переопределить.
+      - name: Сборка и упаковка
+        shell: pwsh
+        env:
+          DOFIRST_SIGN_KEY: ${{ secrets.DOFIRST_SIGN_KEY }}
+        run: >
+          ./build.ps1 package
+          -Version "${{ steps.version.outputs.version }}"
+          -UpdateRepo "${{ github.repository }}"
+          -UpdateKey "${{ vars.DOFIRST_UPDATE_KEY }}"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dofirst-${{ steps.version.outputs.version }}
+          path: |
+            dist/*.exe
+            dist/*.sig
+            dist/*.zip
+
+      - name: Релиз
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            dist/*.exe
+            dist/*.sig
+            dist/*.zip

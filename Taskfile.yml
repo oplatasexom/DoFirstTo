@@ -1,0 +1,52 @@
+version: "3"
+
+vars:
+  VERSION: '{{.VERSION | default "0.1.0"}}'
+  UPDATE_REPO: '{{.UPDATE_REPO | default ""}}'
+  UPDATE_KEY: '{{.UPDATE_KEY | default ""}}'
+  PS: powershell -NoProfile -ExecutionPolicy Bypass -File build.ps1
+
+tasks:
+  default:
+    cmds:
+      - task: build
+
+  build:
+    desc: Собрать dist/dofirst-windows-amd64.exe и -arm64.exe
+    cmds:
+      - '{{.PS}} build -Version "{{.VERSION}}" -UpdateRepo "{{.UPDATE_REPO}}" -UpdateKey "{{.UPDATE_KEY}}"'
+
+  test:
+    desc: go vet и тесты с покрытием
+    cmds:
+      - "{{.PS}} test"
+
+  lint:
+    desc: gofmt, go vet и golangci-lint (если установлен)
+    cmds:
+      - "{{.PS}} lint"
+
+  run:
+    desc: Запустить из исходников с отдельной папкой данных
+    cmds:
+      - "{{.PS}} run"
+
+  smoke:
+    desc: Самопроверка окон на настоящем WebView2
+    cmds:
+      - "{{.PS}} smoke"
+
+  live:
+    desc: Живая проверка блокировки на настоящих окнах
+    cmds:
+      - "{{.PS}} live"
+
+  package:
+    desc: Собрать zip-архивы (и установщик, если есть NSIS)
+    cmds:
+      - '{{.PS}} package -Version "{{.VERSION}}" -UpdateRepo "{{.UPDATE_REPO}}" -UpdateKey "{{.UPDATE_KEY}}"'
+
+  clean:
+    desc: Удалить результаты сборки
+    cmds:
+      - "{{.PS}} clean"

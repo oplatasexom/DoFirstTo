@@ -1,0 +1,20 @@
+# Результаты сборки
+/dist/
+/bin/
+/build/icons/
+*.exe
+*.syso
+*.test
+coverage.out
+
+# Данные запуска из исходников
+/.devdata/
+
+# Закрытый ключ подписи обновлений
+release.key
+*.key
+
+# Редакторы и помощники
+.idea/
+.vscode/
+/.claude/

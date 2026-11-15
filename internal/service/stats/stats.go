@@ -7,9 +7,9 @@ import (
 )
 
 type DaySummary struct {
-	Cycle string `json:"cycle"`
-	Minutes int  `json:"minutes"`
-	Done    bool `json:"done"`
+	Cycle   string `json:"cycle"`
+	Minutes int    `json:"minutes"`
+	Done    bool   `json:"done"`
 }
 
 type Summary struct {
@@ -48,9 +48,9 @@ func Summarize(days []Day, disables []domain.DisableEvent, current string) Summa
 }
 
 type Day struct {
-	Cycle string `json:"cycle"`
+	Cycle    string    `json:"cycle"`
 	LockedAt time.Time `json:"lockedAt"`
-	DoneAt time.Time `json:"doneAt"`
+	DoneAt   time.Time `json:"doneAt"`
 }
 
 // сообщает, были ли в этом цикле выполнены все задачи

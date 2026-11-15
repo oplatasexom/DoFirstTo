@@ -224,7 +224,7 @@ func smokeScript(a *App) error {
 	}
 	outer, _ := windowRect(panel)
 	var client win.Rect
-	smokeGetClientRect.Call(panel, uintptr(unsafe.Pointer(&client))) //nolint:errcheck // нулевой прямоугольник провалит проверку
+	smokeGetClientRect.Call(panel, uintptr(unsafe.Pointer(&client)))
 	if lost := outer.Height() - client.Height(); client.Height() == 0 || lost > win.Scale(16) {
 		return fmt.Errorf("settings window still has a system caption: window %d, client %d", outer.Height(), client.Height())
 	}
@@ -280,8 +280,8 @@ func smokeScript(a *App) error {
 		return errors.New("the widget is not on screen for the click test")
 	}
 	homeX, homeY := win.CursorPos()
-	defer smokeSetCursorPos.Call(uintptr(homeX), uintptr(homeY))                                 //nolint:errcheck // указатель просто останется на месте
-	smokeSetCursorPos.Call(uintptr(work.Left+work.Width()/2), uintptr(work.Top+work.Height()/2)) //nolint:errcheck // проверка ниже заметит неудачу
+	defer smokeSetCursorPos.Call(uintptr(homeX), uintptr(homeY))
+	smokeSetCursorPos.Call(uintptr(work.Left+work.Width()/2), uintptr(work.Top+work.Height()/2))
 	a.loop.Post(a.showMenu)
 	if err := waitUI(a, "tray menu for the click test", func() bool { return a.menu.Visible() }); err != nil {
 		return err
@@ -291,7 +291,7 @@ func smokeScript(a *App) error {
 		return errors.New("tray menu closed before anything was clicked")
 	}
 	widget, _ := windowRect(stage)
-	smokeSetCursorPos.Call(uintptr(widget.Left+widget.Width()/2), uintptr(widget.Top+widget.Height()/2)) //nolint:errcheck // проверка ниже заметит неудачу
+	smokeSetCursorPos.Call(uintptr(widget.Left+widget.Width()/2), uintptr(widget.Top+widget.Height()/2))
 	time.Sleep(150 * time.Millisecond)
 	const leftDown, leftUp = 0x0002, 0x0004
 	smokeMouse(leftDown)

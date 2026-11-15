@@ -1,4 +1,4 @@
-//	go run ./tools/genicon -out build/icons
+// go run ./tools/genicon -out build/icons
 package main
 
 import (

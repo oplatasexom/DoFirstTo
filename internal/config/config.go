@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 )
 
-//	go build -ldflags "-X dofirst/internal/config.Version=1.2.3"
+// go build -ldflags "-X dofirst/internal/config.Version=1.2.3"
 var (
-	Version = "0.1.0-dev"
+	Version    = "0.1.0-dev"
 	UpdateRepo = ""
 	// Ed25519 (base64) для проверки подписи релиза
 	UpdateKey = ""
@@ -20,8 +20,8 @@ const (
 )
 
 type Paths struct {
-	Data string
-	Log string
+	Data    string
+	Log     string
 	WebView string
 }
 

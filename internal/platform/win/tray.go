@@ -133,7 +133,7 @@ func (t *Tray) PopupMenu(items []MenuItem) {
 	if menu == 0 {
 		return
 	}
-	defer procDestroyMenu.Call(menu) 
+	defer procDestroyMenu.Call(menu)
 
 	for i, item := range items {
 		if item.Separator {

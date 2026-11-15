@@ -56,15 +56,15 @@ type Shell interface {
 }
 
 type Program struct {
-	Name string `json:"name"`
-	Exe string `json:"exe"`
+	Name  string `json:"name"`
+	Exe   string `json:"exe"`
 	Title string `json:"title,omitempty"`
-	Icon string `json:"icon,omitempty"`
+	Icon  string `json:"icon,omitempty"`
 }
 
 type UpdateInfo struct {
-	Configured bool `json:"configured"`
-	Version string `json:"version,omitempty"`
+	Configured bool   `json:"configured"`
+	Version    string `json:"version,omitempty"`
 }
 
 type Updates interface {

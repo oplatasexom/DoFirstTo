@@ -46,18 +46,18 @@ const (
 )
 
 type Marks struct {
-	FirstRun time.Time `json:"firstRun"`
-	DoneCycle string `json:"doneCycle,omitempty"`
-	DisabledCycle string `json:"disabledCycle,omitempty"`
-	NightOffCycle string `json:"nightOffCycle,omitempty"`
-	SnoozeUntil time.Time `json:"snoozeUntil"`
+	FirstRun      time.Time `json:"firstRun"`
+	DoneCycle     string    `json:"doneCycle,omitempty"`
+	DisabledCycle string    `json:"disabledCycle,omitempty"`
+	NightOffCycle string    `json:"nightOffCycle,omitempty"`
+	SnoozeUntil   time.Time `json:"snoozeUntil"`
 }
 
 type Status struct {
 	Phase  Phase
 	Reason Reason
-	Cycle string
-	Next time.Time
+	Cycle  string
+	Next   time.Time
 }
 
 func Evaluate(s domain.Schedule, m Marks, now time.Time) Status {

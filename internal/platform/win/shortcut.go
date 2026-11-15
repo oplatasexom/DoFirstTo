@@ -9,7 +9,7 @@ import (
 )
 
 type Shortcut struct {
-	Target string
+	Target    string
 	Arguments string
 }
 

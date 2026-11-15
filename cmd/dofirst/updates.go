@@ -17,8 +17,8 @@ import (
 )
 
 const (
-	checkTimeout = 20 * time.Second
-	applyTimeout = 5 * time.Minute
+	checkTimeout    = 20 * time.Second
+	applyTimeout    = 5 * time.Minute
 	afterUpdateFlag = "--after-update"
 )
 

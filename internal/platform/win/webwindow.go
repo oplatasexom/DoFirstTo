@@ -23,24 +23,24 @@ func WebViewVersion() (string, error) {
 }
 
 type WebOptions struct {
-	Title string
-	DataPath string
-	Icon []byte
+	Title                                 string
+	DataPath                              string
+	Icon                                  []byte
 	BackgroundR, BackgroundG, BackgroundB uint8
-	Light bool
-	OnMessage func(message string)
-	OnClose func()
-	OnDeactivate func()
-	OnState func(maximized bool)
-	OnError func(err error)
+	Light                                 bool
+	OnMessage                             func(message string)
+	OnClose                               func()
+	OnDeactivate                          func()
+	OnState                               func(maximized bool)
+	OnError                               func(err error)
 }
 
 type Placement struct {
 	X, Y, W, H int32
-	Frame bool
-	Topmost bool
+	Frame      bool
+	Topmost    bool
 	NoActivate bool
-	Rounded bool
+	Rounded    bool
 }
 
 type WebWindow struct {
@@ -272,7 +272,7 @@ func (w *WebWindow) calcClientArea(wParam, lParam uintptr) uintptr {
 }
 
 func dwmSet(hwnd uintptr, attribute uintptr, value uint32) {
-	procDwmSetWindowAttribute.Call(hwnd, attribute, uintptr(unsafe.Pointer(&value)), unsafe.Sizeof(value)) //nolint:errcheck // см. выше
+	procDwmSetWindowAttribute.Call(hwnd, attribute, uintptr(unsafe.Pointer(&value)), unsafe.Sizeof(value))
 }
 
 func ForegroundHandle() uintptr { return foregroundWindow() }

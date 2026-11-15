@@ -34,19 +34,19 @@ const (
 )
 
 type Release struct {
-	Version string
-	AssetURL string
+	Version      string
+	AssetURL     string
 	SignatureURL string
 }
 
 type Config struct {
-	Repo string
+	Repo      string
 	PublicKey string
-	Current string
-	Asset string
-	ExePath string
-	Client *http.Client
-	APIBase string
+	Current   string
+	Asset     string
+	ExePath   string
+	Client    *http.Client
+	APIBase   string
 }
 
 type Service struct {

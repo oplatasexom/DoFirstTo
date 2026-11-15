@@ -43,15 +43,15 @@ func (i *Inspector) Foreground() (guard.Window, error) {
 }
 
 type OpenProgram struct {
-	Exe string
-	Path string
+	Exe   string
+	Path  string
 	Title string
 }
 
 func (i *Inspector) OpenPrograms() []OpenProgram {
 	i.mu.Lock()
 	i.list = i.list[:0]
-	procEnumWindows.Call(i.listCB, 0) //nolint:errcheck
+	procEnumWindows.Call(i.listCB, 0)
 	handles := slices.Clone(i.list)
 	i.mu.Unlock()
 

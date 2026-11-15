@@ -32,18 +32,18 @@ var (
 const (
 	swMinimize = 6
 
-	gwlExStyle     = ^uintptr(19) // -20
-	wsExToolWindow = 0x00000080
-	dwmwaCloaked   = 14
-	inputKeyboard  = 1
-	keyEventKeyUp  = 0x0002
-	vkShift        = 0x10
-	vkControl      = 0x11
-	vkMenu         = 0x12 // Alt
-	vkLWin         = 0x5B
-	vkRWin         = 0x5C
-	vkW            = 0x57
-	keyPressedMask = 0x8000
+	gwlExStyle      = ^uintptr(19) // -20
+	wsExToolWindow  = 0x00000080
+	dwmwaCloaked    = 14
+	inputKeyboard   = 1
+	keyEventKeyUp   = 0x0002
+	vkShift         = 0x10
+	vkControl       = 0x11
+	vkMenu          = 0x12 // Alt
+	vkLWin          = 0x5B
+	vkRWin          = 0x5C
+	vkW             = 0x57
+	keyPressedMask  = 0x8000
 	keyPressedSince = 0x0001
 	maxProcessPath  = 1024
 	frameHostExe    = "applicationframehost.exe"
@@ -58,7 +58,7 @@ func foregroundWindow() uintptr {
 
 func windowProcessID(hwnd uintptr) uint32 {
 	var pid uint32
-	procGetWindowThreadProcessID.Call(hwnd, uintptr(unsafe.Pointer(&pid))) //nolint:errcheck // pid остаётся нулём
+	procGetWindowThreadProcessID.Call(hwnd, uintptr(unsafe.Pointer(&pid)))
 	return pid
 }
 

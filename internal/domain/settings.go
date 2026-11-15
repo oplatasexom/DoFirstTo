@@ -22,17 +22,17 @@ type AppGroup struct {
 }
 
 type Task struct {
-	ID          string   `json:"id"`
-	Title       string   `json:"title"`
-	Description string   `json:"description,omitempty"`
-	Kind        TaskKind `json:"kind"`
-	MinMinutes int `json:"minMinutes,omitempty"`
-	RequireNote bool `json:"requireNote,omitempty"`
-	Journal bool `json:"journal,omitempty"`
-	Needs []string `json:"needs,omitempty"`
-	Unlocks []string `json:"unlocks,omitempty"`
-	Launch []string `json:"launch,omitempty"`
-	Days []time.Weekday `json:"days,omitempty"`
+	ID          string         `json:"id"`
+	Title       string         `json:"title"`
+	Description string         `json:"description,omitempty"`
+	Kind        TaskKind       `json:"kind"`
+	MinMinutes  int            `json:"minMinutes,omitempty"`
+	RequireNote bool           `json:"requireNote,omitempty"`
+	Journal     bool           `json:"journal,omitempty"`
+	Needs       []string       `json:"needs,omitempty"`
+	Unlocks     []string       `json:"unlocks,omitempty"`
+	Launch      []string       `json:"launch,omitempty"`
+	Days        []time.Weekday `json:"days,omitempty"`
 }
 
 func (t Task) On(day time.Weekday) bool {
@@ -40,8 +40,8 @@ func (t Task) On(day time.Weekday) bool {
 }
 
 type TaskList struct {
-	Tasks []Task `json:"tasks"`
-	StrictOrder bool `json:"strictOrder"`
+	Tasks       []Task `json:"tasks"`
+	StrictOrder bool   `json:"strictOrder"`
 }
 
 func (l TaskList) ForDay(day time.Weekday) TaskList {
@@ -55,26 +55,26 @@ func (l TaskList) ForDay(day time.Weekday) TaskList {
 }
 
 type Schedule struct {
-	Enabled bool `json:"enabled"`
-	Bedtime TimeOfDay `json:"bedtime"`
-	WakeTime TimeOfDay `json:"wakeTime"`
-	Days []time.Weekday `json:"days"`
-	AutoRelease *TimeOfDay `json:"autoRelease,omitempty"`
-	NightScreen bool `json:"nightScreen"`
-	NightGroups []string `json:"nightGroups,omitempty"`
+	Enabled     bool           `json:"enabled"`
+	Bedtime     TimeOfDay      `json:"bedtime"`
+	WakeTime    TimeOfDay      `json:"wakeTime"`
+	Days        []time.Weekday `json:"days"`
+	AutoRelease *TimeOfDay     `json:"autoRelease,omitempty"`
+	NightScreen bool           `json:"nightScreen"`
+	NightGroups []string       `json:"nightGroups,omitempty"`
 }
 
 type Settings struct {
-	Language string     `json:"language"`
-	Schedule Schedule   `json:"schedule"`
-	Tasks    TaskList   `json:"tasks"`
-	Groups   []AppGroup `json:"groups"`
-	AlwaysAllowed []string `json:"alwaysAllowed,omitempty"`
-	TabCountdownSec int    `json:"tabCountdownSec"`
-	Autostart       bool   `json:"autostart"`
-	Hotkey          string `json:"hotkey"`
-	Theme string `json:"theme,omitempty"`
-	Themes []Theme `json:"themes,omitempty"`
+	Language        string     `json:"language"`
+	Schedule        Schedule   `json:"schedule"`
+	Tasks           TaskList   `json:"tasks"`
+	Groups          []AppGroup `json:"groups"`
+	AlwaysAllowed   []string   `json:"alwaysAllowed,omitempty"`
+	TabCountdownSec int        `json:"tabCountdownSec"`
+	Autostart       bool       `json:"autostart"`
+	Hotkey          string     `json:"hotkey"`
+	Theme           string     `json:"theme,omitempty"`
+	Themes          []Theme    `json:"themes,omitempty"`
 }
 
 func DefaultSettings() Settings {

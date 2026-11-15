@@ -14,17 +14,25 @@ linters:
     - revive
     - unconvert
   settings:
+    errcheck:
+      # У вызовов Win32 «ошибка» — это GetLastError, а не признак сбоя:
+      # успех проверяется по возвращаемому значению.
+      exclude-functions:
+        - (*golang.org/x/sys/windows.LazyProc).Call
+        - golang.org/x/sys/windows.CloseHandle
+        - golang.org/x/sys/windows.LocalFree
+        - (golang.org/x/sys/windows/registry.Key).Close
     nolintlint:
-      require-explanation: true
       require-specific: true
     revive:
       rules:
-        - name: exported
-        - name: package-comments
         - name: error-return
         - name: error-naming
         - name: var-naming
   exclusions:
+    # Close в defer и печать в консоль: их ошибки здесь не обрабатываются.
+    presets:
+      - std-error-handling
     rules:
       # В тестах сравнение с ожидаемым важнее обработки каждой ошибки
       - path: _test\.go

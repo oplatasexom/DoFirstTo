@@ -40,8 +40,8 @@ const (
 )
 
 type Installed struct {
-	Name string
-	Exe string
+	Name     string
+	Exe      string
 	IconPath string
 }
 
@@ -225,7 +225,7 @@ func iconImage(icon uintptr) (*image.NRGBA, error) {
 	}
 
 	var bm gdiBitmap
-	procGetObjectW.Call(info.color, unsafe.Sizeof(bm), uintptr(unsafe.Pointer(&bm))) //nolint:errcheck // размеры проверяются ниже
+	procGetObjectW.Call(info.color, unsafe.Sizeof(bm), uintptr(unsafe.Pointer(&bm)))
 	w, h := int(bm.width), int(bm.height)
 	if w <= 0 || h <= 0 || w > maxIconSide || h > maxIconSide {
 		return nil, fmt.Errorf("unexpected icon size %dx%d", w, h)

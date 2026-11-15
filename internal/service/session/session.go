@@ -32,12 +32,12 @@ type Progress struct {
 // State - сохраняемое состояние цикла
 type State struct {
 	// Cycle - идентификатор цикла
-	Cycle      string    `json:"cycle"`
-	StartedAt  time.Time `json:"startedAt"`
-	FinishedAt time.Time `json:"finishedAt"`
-	Active string `json:"active,omitempty"`
-	Paused bool                `json:"paused,omitempty"`
-	Tasks  map[string]Progress `json:"tasks"`
+	Cycle      string              `json:"cycle"`
+	StartedAt  time.Time           `json:"startedAt"`
+	FinishedAt time.Time           `json:"finishedAt"`
+	Active     string              `json:"active,omitempty"`
+	Paused     bool                `json:"paused,omitempty"`
+	Tasks      map[string]Progress `json:"tasks"`
 }
 
 func NewState(cycle string, now time.Time) State {
@@ -47,9 +47,9 @@ func NewState(cycle string, now time.Time) State {
 type Status string
 
 const (
-	StatusDone Status = "done"
+	StatusDone   Status = "done"
 	StatusActive Status = "active"
-	StatusReady Status = "ready"
+	StatusReady  Status = "ready"
 	StatusLocked Status = "locked"
 )
 
@@ -63,7 +63,7 @@ type TaskView struct {
 
 type Result struct {
 	AllDone bool
-	Entry *domain.JournalEntry
+	Entry   *domain.JournalEntry
 }
 
 type Session struct {

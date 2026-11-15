@@ -15,8 +15,8 @@ type DisableMode string
 
 const (
 	DisableUntilTomorrow DisableMode = "tomorrow"
-	DisableQuit DisableMode = "quit"
-	DisableNight DisableMode = "night"
+	DisableQuit          DisableMode = "quit"
+	DisableNight         DisableMode = "night"
 )
 
 type DisableEvent struct {

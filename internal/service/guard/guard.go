@@ -9,10 +9,10 @@ import (
 )
 
 type Window struct {
-	ID uintptr
+	ID    uintptr
 	Exe   string
 	Title string
-	Own bool
+	Own   bool
 }
 
 // сообщает, какое окно сейчас активно
@@ -40,9 +40,9 @@ type Presenter interface {
 }
 
 type Config struct {
-	Countdown time.Duration
+	Countdown    time.Duration
 	NeutralGrace time.Duration
-	MaxStrikes int
+	MaxStrikes   int
 	StrikeWindow time.Duration
 }
 

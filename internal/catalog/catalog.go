@@ -14,7 +14,7 @@ const (
 	Music    Category = "music"
 	Chat     Category = "chat"
 	Design   Category = "design"
-	Other Category = "other"
+	Other    Category = "other"
 )
 
 // Categories возвращает разделы в порядке показа

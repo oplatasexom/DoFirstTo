@@ -20,21 +20,21 @@ import (
 )
 
 const (
-	hotkeyID = 1
+	hotkeyID      = 1
 	collapseDelay = 1500 * time.Millisecond
-	iconWorkers = 8
-	celebrateFor = 20 * time.Second
-	menuPoll = 30 * time.Millisecond
+	iconWorkers   = 8
+	celebrateFor  = 20 * time.Second
+	menuPoll      = 30 * time.Millisecond
 )
 
 type Options struct {
-	Loop      *win.Loop
-	Log       *slog.Logger
-	Inspector *win.Inspector
-	Autostart *win.Autostart
+	Loop       *win.Loop
+	Log        *slog.Logger
+	Inspector  *win.Inspector
+	Autostart  *win.Autostart
 	WebViewDir string
 	Version    string
-	Tick time.Duration
+	Tick       time.Duration
 }
 
 type App struct {

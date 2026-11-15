@@ -2,8 +2,8 @@ package ui
 
 // что видно в момент проверки всплывающего окна.
 type popupProbe struct {
-	ButtonDown bool
-	CursorInside bool
+	ButtonDown       bool
+	CursorInside     bool
 	Foreground, Self uintptr
 }
 

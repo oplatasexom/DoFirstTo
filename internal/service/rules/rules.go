@@ -12,7 +12,7 @@ import (
 var ErrNoPrograms = errors.New("rule lists no programs")
 
 type Rule struct {
-	Exes []string
+	Exes   []string
 	Titles []string
 }
 
@@ -86,7 +86,7 @@ func Compile(groups []domain.AppGroup, active []string) ([]Rule, error) {
 }
 
 type Window struct {
-	Exe string
+	Exe   string
 	Title string
 }
 
@@ -115,10 +115,10 @@ func (v Verdict) String() string {
 }
 
 type Options struct {
-	Always []string
+	Always       []string
 	NeutralParts []string
 	NeutralExact []string
-	Browsers []string
+	Browsers     []string
 }
 
 func DefaultOptions() Options {

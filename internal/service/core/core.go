@@ -41,7 +41,6 @@ type Store interface {
 	Save(name string, value any) error
 }
 
-
 type Screen interface {
 	guard.Presenter
 	Changed(v View)
@@ -74,19 +73,19 @@ type TaskView struct {
 }
 
 type View struct {
-	Phase  string `json:"phase"`
-	Reason string `json:"reason"`
-	Cycle  string `json:"cycle"`
-	Test        bool   `json:"test"`
-	StrictOrder bool   `json:"strictOrder"`
-	Active      string `json:"active"`
-	Running     bool   `json:"timerRunning"`
-	Paused bool       `json:"paused"`
-	Tasks  []TaskView `json:"tasks"`
-	OpenGroups []string  `json:"openGroups"`
-	Streak     int       `json:"streak"`
-	Now        time.Time `json:"now"`
-	Next       time.Time `json:"next"`
+	Phase       string     `json:"phase"`
+	Reason      string     `json:"reason"`
+	Cycle       string     `json:"cycle"`
+	Test        bool       `json:"test"`
+	StrictOrder bool       `json:"strictOrder"`
+	Active      string     `json:"active"`
+	Running     bool       `json:"timerRunning"`
+	Paused      bool       `json:"paused"`
+	Tasks       []TaskView `json:"tasks"`
+	OpenGroups  []string   `json:"openGroups"`
+	Streak      int        `json:"streak"`
+	Now         time.Time  `json:"now"`
+	Next        time.Time  `json:"next"`
 }
 
 type Core struct {

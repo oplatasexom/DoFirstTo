@@ -13,8 +13,8 @@ import (
 const RunKey = `Software\Microsoft\Windows\CurrentVersion\Run`
 
 type Autostart struct {
-	Key string
-	Name string
+	Key     string
+	Name    string
 	Command string
 }
 
